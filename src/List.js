@@ -16,13 +16,18 @@ return (
                     key={card.id}
                     title={card.title}
                     content={card.content}
+                    onDeleteItem={props.onDeleteItem}
+                    id={card.id}
                     />
                     )}
                 <button 
+                    onClick={() => props.onClickAddItem}
                     type="button"
                     className='List-add-button'
-
-                    />   
+                    >  
+                    Add Random Card
+                    </button>
+                />
         </div>
     </section>
 )

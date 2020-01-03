@@ -20,6 +20,10 @@ const newRandomCard = () => {
   }
 }
 
+// Set state and card to all cards object
+// 
+// 
+
 class App extends Component {
   static defaultProps = {
     store: {
@@ -83,8 +87,27 @@ class App extends Component {
     })
   }
 
-  handleAddRandomItem = () => {
+  handleAddRandomItem = (listId) => {
     console.log('random item added')
+    const newCard = newRandomCard();
+
+    const newLists = this.state.lists.map(list => {
+      if (list.id === listId) {
+        return {
+          ...list,
+          cardIds: [...list.cardIds, newCard.id]
+        };
+      }
+      return list;
+    })
+    
+
+    const newAllCards = { ...this.state.allCards, [newCard.id] : newCard}
+
+    this.setState({
+      lists: newLists,
+      allCards: newAllCards
+    })
   }
 
   render() {
@@ -98,10 +121,11 @@ class App extends Component {
         {this.state.lists.map(list => (
           <List 
               key={list.id}
+              id={list.id}
               header={list.header}
               cards={list.cardIds.map(id => this.state.allCards[id])}
               onDeleteItem={this.handleDeleteItem}
-              onClickAddItem={this.handleAddItem}
+              onClickAddItem={this.handleAddRandomItem}
 
               />
         ))}

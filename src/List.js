@@ -21,16 +21,20 @@ return (
                     />
                     )}
                 <button 
-                    onClick={() => props.onClickAddItem}
+                    onClick={() => props.onClickAddItem(props.id)}
                     type="button"
                     className='List-add-button'
                     >  
                     Add Random Card
                     </button>
-                />
+            
         </div>
     </section>
 )
 
 }
     
+List.defaultProps = {
+    onClickAddItem: () => {},
+    
+}
